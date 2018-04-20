@@ -38,32 +38,29 @@ var gameStarted = false;
 var hasFinished = false;        
 var wins = 0;                   
 
-// Reset our game-level variables
+// Reset game variables
 function resetGame() {
     remainingGuesses = maxTries;
     gameStarted = false;
 
-    // Use Math.floor to round the random number down to the nearest whole.
     currentWordIndex = Math.floor(Math.random() * (selectableWords.length));
 
-    // Clear out arrays
     guessedLetters = [];
     guessingWord = [];
 
-    // Build the guessing word and clear it out
     for (var i = 0; i < selectableWords[currentWordIndex].length; i++) {
         guessingWord.push("_");
     }
-    // Hide game over and win images/text
+
     document.getElementById("pressKeyTryAgain").style.cssText= "display: none";
     document.getElementById("youlose-image").style.cssText = "display: none";
     document.getElementById("win-image").style.cssText = "display: none";
 
-    // Show display
+    // Show Display
     updateDisplay();
 };
 
-//  Updates the display on the HTML Page
+
 function updateDisplay() {
 
     document.getElementById("totalWins").innerText = wins;
@@ -81,12 +78,10 @@ function updateDisplay() {
 };
 
 document.onkeydown = function(event) {
-    // If we finished a game, dump one keystroke and reset.
     if(hasFinished) {
         resetGame();
         hasFinished = false;
     } else {
-        // Check to make sure a-z was pressed.
         if(event.keyCode >= 65 && event.keyCode <= 90) {
             makeGuess(event.key.toLowerCase());
         }
@@ -98,7 +93,6 @@ function makeGuess(letter) {
             gameStarted = true;
         }
 
-        // Make sure we didn't use this letter yet
         if (guessedLetters.indexOf(letter) === -1) {
             guessedLetters.push(letter);
             evaluateGuess(letter);
@@ -108,25 +102,20 @@ function makeGuess(letter) {
     updateDisplay();
     checkWin();
 };
-// This function takes a letter and finds all instances of 
-// appearance in the string and replaces them in the guess word.
+
 function evaluateGuess(letter) {
-    // Array to store positions of letters in string
     var positions = [];
 
-    // Loop through word finding all instances of guessed letter, store the indicies in an array.
     for (var i = 0; i < selectableWords[currentWordIndex].length; i++) {
         if(selectableWords[currentWordIndex][i] === letter) {
             positions.push(i);
         }
     }
 
-    // if there are no indicies, remove a guess and update the hangman image
     if (positions.length <= 0) {
         remainingGuesses--;
     } 
     else {
-        // Loop through all the indicies and replace the '_' with a letter.
         for(var i = 0; i < positions.length; i++) {
             guessingWord[positions[i]] = letter;
         }
