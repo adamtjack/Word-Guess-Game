@@ -16,7 +16,7 @@ h4,h5,h6 {
     padding: 5px;
     background-color: red;
 }
-#title-image, #gameover-image, #youwin-image{ 
+#title-image, #youlose-image, #win-image{ 
     display: block;
     margin: 0 auto;
 }
@@ -26,8 +26,7 @@ h4,h5,h6 {
 }
 
 #pressKeyTryAgain, 
-#gameover-image, 
-#youwin-image { display: none;}
+#win-image { display: none;}
 .gameplay-column {
     padding-top: 20px;
     border: 3px dashed #fff;
@@ -35,6 +34,15 @@ h4,h5,h6 {
     margin-top: 20px;
     min-height: 500px;
     background-color: black;
+}
+#youlose-image {
+    padding-top: 20px;
+    border: 3px dashed #fff;
+    margin-top: 20px;
+    height: 80%;
+    background-color: black;
+    width: 80%;
+   
 }
 
 p {
